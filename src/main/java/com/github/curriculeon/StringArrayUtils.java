@@ -211,11 +211,6 @@ public class StringArrayUtils {
 
         }
 
-            for(String ele: result){
-                System.out.println(ele);
-            }
-
-
         return result;
     }
 

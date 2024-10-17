@@ -162,13 +162,7 @@ public class StringArrayUtils {
                 }else{
                     break;
                 }
-
             }
-
-
-
-
-
         }
 
         return result;
@@ -179,7 +173,50 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        String [] result = new String[]{};
+        boolean isDup = false;
+        String duplicates ="";
+        for(int i=0; i< array.length; i++){
+            if(i+1 >= array.length && isDup){
+                duplicates += array[i];
+                result = Arrays.copyOf(result, result.length +1);
+                result[result.length-1] = duplicates;
+                break;
+            }else if(i+1 >= array.length){
+                result = Arrays.copyOf(result, result.length +1);
+                result[result.length-1] = array[i];
+                break;
+            }
+
+            //System.out.println("result: " + result[result.length-1]);
+            if(array[i].equals(array[i+1])){
+                // first check if current is same as next element , if so make isDup true and add char to dual str,
+                isDup =true;
+                duplicates+= array[i];
+                //System.out.println(duplicates);
+            }else{
+                // if not (if isDup is true add element to duplicates and add duplicates to results and make isDup false and empty dup then continue),
+                // otherwise add element to result
+                if(isDup==true){
+                    duplicates += array[i];
+                    result = Arrays.copyOf(result, result.length +1);
+                    result[result.length-1] = duplicates;
+                    isDup = false;
+                    duplicates ="";
+                }else{
+                    result = Arrays.copyOf(result, result.length +1);
+                    result[result.length-1] = array[i];
+                }
+            }
+
+        }
+
+            for(String ele: result){
+                System.out.println(ele);
+            }
+
+
+        return result;
     }
 
 
